@@ -19,6 +19,23 @@ Basit, hızlı ve renkli bir IP adresi analiz aracı. Tek bir komutla IP adresi 
 - 🎨 **Renkli Çıktı**: Okunması kolay, renkli terminal çıktısı
 - 💾 **JSON Çıktısı**: Sonuçları JSON formatında kaydetme
 
+
+```
+
+🛠️ Gereksinimler
+
+· Python 3.6+
+· Internet bağlantısı
+
+📝 Lisans
+
+MIT License - Detaylar için LICENSE dosyasına bakın.
+
+⚠️ Uyarı
+
+Bu araç yalnızca eğitim ve güvenlik testleri amacıyla kullanılmalıdır. Yetkisiz kullanımdan kullanıcı sorumludur.
+
+```
 ## 🚀 Kurulum
 
 ```bash
