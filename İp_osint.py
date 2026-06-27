@@ -24,13 +24,13 @@ BANNER = f"""
    ██║██╔═══╝     ██╔══██╗╚════██║██║██║╚██╗██║   ██║   
    ██║██║         ██║  ██║███████║██║██║ ╚████║   ██║   
    ╚═╝╚═╝         ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝   
-{Fore.YELLOW}          PyCraftTools IP OSINT Tool 
+{Fore.YELLOW}          PyCraftTools IP OSINT Tool
 {Fore.GREEN}     GitHub: https://github.com/kadrbequit/-p-osint-.git
 {Style.RESET_ALL}
 """
 
 class IPOSINT:
- 
+    
     
     def __init__(self, ip_address):
         self.ip = ip_address
@@ -41,13 +41,13 @@ class IPOSINT:
             'warning': Fore.YELLOW,
             'danger': Fore.RED,
             'highlight': Fore.MAGENTA,
-            'dim': Fore.LIGHTBLACK_EX,
+            'dim': Style.DIM,  
             'reset': Style.RESET_ALL
         }
         self.validate_ip()
         
     def validate_ip(self):
-        """IP adresini doğrula"""
+       
         try:
             ipaddress.ip_address(self.ip)
         except ValueError:
@@ -55,23 +55,23 @@ class IPOSINT:
             sys.exit(1)
             
     def print_header(self, title, color=Fore.CYAN):
-        """Başlık yazdır"""
+       
         print(f"\n{color}{Style.BRIGHT}┌{'─' * 50}┐")
         print(f"│ {title.center(48)} │")
         print(f"└{'─' * 50}┘{Style.RESET_ALL}\n")
         
     def print_section(self, title, color=Fore.YELLOW):
-        """Bölüm başlığı yazdır"""
+       
         print(f"\n{color}{Style.BRIGHT}▶ {title}{Style.RESET_ALL}")
         print(f"{color}{'─' * 40}{Style.RESET_ALL}")
         
     def print_result(self, key, value, color=Fore.WHITE):
-        """Sonuç yazdır"""
+       
         if value and value != 'N/A' and value != '':
             print(f"  {Fore.CYAN}▸ {key}:{Style.RESET_ALL} {color}{value}{Style.RESET_ALL}")
             
     def get_ip_info(self):
-        """ip-api.com ile temel IP bilgileri"""
+       
         self.print_section("📍 Coğrafi Konum Bilgileri", Fore.GREEN)
         
         try:
@@ -80,7 +80,7 @@ class IPOSINT:
             data = response.json()
             
             if data.get('status') == 'success':
-                
+               
                 flag = self.get_country_flag(data.get('countryCode', ''))
                 
                 print(f"  {Fore.CYAN}🌐 IP Adresi:{Style.RESET_ALL} {Fore.WHITE}{self.ip}{Style.RESET_ALL}")
@@ -137,11 +137,11 @@ class IPOSINT:
             print(f"  {Fore.RED}❌ Hata: {str(e)}{Style.RESET_ALL}")
             
     def get_whois(self):
-        """Whois bilgisi"""
+       
         self.print_section("📋 Whois Bilgileri", Fore.BLUE)
         
         try:
-            
+        
             try:
                 domain = socket.gethostbyaddr(self.ip)[0]
                 if domain:
@@ -227,7 +227,7 @@ class IPOSINT:
                     abuse_data = data['data']
                     score = abuse_data.get('abuseConfidenceScore', 0)
                     
-                   
+                    
                     if score >= 80:
                         risk_color = Fore.RED
                         risk_level = "KRİTİK"
@@ -261,7 +261,7 @@ class IPOSINT:
             print(f"  {Fore.YELLOW}⚠️ Tehdit istihbaratı sorgulanamadı: {str(e)}{Style.RESET_ALL}")
             
     def port_scan(self):
-        """Basit port taraması"""
+  
         self.print_section("🔌 Port Taraması (Yaygın Portlar)", Fore.CYAN)
         
         
@@ -356,21 +356,21 @@ class IPOSINT:
             import subprocess
             import platform
             
-            
+         
             param = '-n' if platform.system().lower() == 'windows' else '-c'
             command = ['ping', param, '2', '-W', '2', self.ip]
             
             result = subprocess.run(command, capture_output=True, text=True, timeout=5)
             
             if result.returncode == 0:
-           
+         
                 import re
                 
                
                 ttl_match = re.search(r'ttl=(\d+)', result.stdout, re.IGNORECASE)
                 ttl = ttl_match.group(1) if ttl_match else 'N/A'
                 
-                
+               
                 if platform.system().lower() == 'windows':
                     avg_match = re.search(r'Ortalama = (\d+)ms', result.stdout)
                 else:
@@ -411,10 +411,10 @@ class IPOSINT:
                 print(f"  {Fore.CYAN}▸ {key}:{Style.RESET_ALL} {Fore.WHITE}{value}{Style.RESET_ALL}")
                 
         print(f"\n  {Fore.GREEN}✅ Analiz tamamlandı!{Style.RESET_ALL}")
-        print(f"  {Fore.DIM}📁 Sonuçlar JSON olarak kaydedildi: {self.ip}_report.json{Style.RESET_ALL}")
+        print(f"  {Style.DIM}📁 Sonuçlar JSON olarak kaydedildi: {self.ip}_report.json{Style.RESET_ALL}")
         
     def save_results(self):
-        """Sonuçları JSON olarak kaydet"""
+      
         try:
             filename = f"{self.ip}_report.json"
             with open(filename, 'w', encoding='utf-8') as f:
@@ -423,13 +423,13 @@ class IPOSINT:
             print(f"  {Fore.YELLOW}⚠️ Sonuçlar kaydedilemedi: {str(e)}{Style.RESET_ALL}")
             
     def run(self):
-        """Tüm analizi çalıştır"""
+      
         
         print(BANNER)
-        print(f"{Fore.DIM}{'═' * 60}{Style.RESET_ALL}")
+        print(f"{Style.DIM}{'═' * 60}{Style.RESET_ALL}")  
         print(f"{Fore.CYAN}🎯 Hedef IP: {Fore.WHITE}{self.ip}{Style.RESET_ALL}")
         print(f"{Fore.CYAN}🕐 Zaman: {Fore.WHITE}{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}{Style.RESET_ALL}")
-        print(f"{Fore.DIM}{'═' * 60}{Style.RESET_ALL}")
+        print(f"{Style.DIM}{'═' * 60}{Style.RESET_ALL}") 
         
         
         self.get_ip_info()
@@ -463,7 +463,7 @@ def main():
     
     args = parser.parse_args()
     
-    
+  
     tool = IPOSINT(args.ip)
     
     if args.json:
