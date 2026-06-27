@@ -25,7 +25,7 @@ BANNER = f"""
    ██║██║         ██║  ██║███████║██║██║ ╚████║   ██║   
    ╚═╝╚═╝         ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝   
 {Fore.YELLOW}          PyCraftTools IP OSINT Tool 
-{Fore.GREEN}     GitHub: 
+{Fore.GREEN}     GitHub: https://github.com/kadrbequit/-p-osint-.git
 {Style.RESET_ALL}
 """
 
