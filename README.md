@@ -41,17 +41,17 @@ Bu araç yalnızca eğitim ve güvenlik testleri amacıyla kullanılmalıdır. Y
 ```bash
 # Repoyu klonla
 git clone  https://github.com/kadrbequit/-p-osint-.git
-cd ip-osint
+cd -p-osint-
 
 # Bağımlılıkları yükle
 pip install -r requirements.txt
 
 #temel kullanım 
-python ip_osint.py 8.8.8.8
+python  İp_osint.py 8.8.8.8
 #json çıktısı 
-python ip_osint.py 8.8.8.8 --json
+python   İp_osint.py 8.8.8.8 --json
 #yardım
-python ip_osint.py --help
+python   İp_osint.py --help
 
 
 
